@@ -69,8 +69,6 @@ then
   workdir="$PWD"
   ( cd /etc/opt/SUNWut && "$workdir"/srss/*/Supplemental/Java_Runtime_Environment/Linux/jre-1_5_0_11-linux-i586.bin )
   ( cd /etc/opt/SUNWut && ln -s jre1.5* jre )
-  # XXX # TRY INSTEAD:
-  # XXX ln -s /usr/lib/jvm/java-6-sun /etc/opt/SUNWut/jre
   touch srss_sun_java
 fi
 
@@ -118,11 +116,6 @@ echo "DISTRIB_ID=Debian" > /etc/lsb-release
   then
     ln -s ../fonts/X11 fonts
   fi )
-
-# NOT ANYMORE #
-# NOT ANYMORE # GDM
-# NOT ANYMORE #
-# NOT ANYMORE sed -i.orig 's/dpkg -L "gdm"/dpkg -L "gdm-2.20"/' /opt/SUNWut/lib/utgdmconfigpath /opt/SUNWut/sbin/utinstall
 
 #
 # Init script

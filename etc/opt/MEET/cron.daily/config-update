@@ -1,8 +1,0 @@
-#!/bin/bash
-
-#
-# Update configuration files.
-# [maxg]
-#
-
-( cd / && git pull origin master --quiet )

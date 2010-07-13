@@ -1,4 +1,0 @@
-#!/bin/sh
-
-update-alternatives --set gnome-www-browser /usr/bin/iceweasel
-update-alternatives --set x-www-browser /usr/bin/iceweasel

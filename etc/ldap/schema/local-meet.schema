@@ -1,0 +1,82 @@
+#
+# local-meet.schema -- MEET schema
+#
+# [maxg]
+#
+
+objectIdentifier meetMEET 1.3.6.1.4.1.30343
+objectIdentifier meetLDAP meetMEET:2
+objectIdentifier meetAttributeType meetLDAP:1
+objectIdentifier meetObjectClass meetLDAP:2
+
+attributetype ( meetAttributeType:1.1
+    NAME 'meetLongDescription'
+    DESC 'MEET: long description'
+    EQUALITY caseIgnoreMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768}
+    SINGLE-VALUE )
+
+objectclass ( meetObjectClass:1.1
+    NAME 'meetDescribedObject'
+    DESC 'MEET: described object mixin'
+    AUXILIARY
+    MAY meetLongDescription )
+
+attributetype ( meetAttributeType:3.1
+    NAME 'meetIdNumber'
+    DESC 'MEET: ID number'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+    SINGLE-VALUE )
+
+attributetype ( meetAttributeType:3.2
+    NAME 'meetDateOfBirth'
+    DESC 'MEET: date of birth'
+    EQUALITY caseExactIA5Match
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{10}
+    SINGLE-VALUE )
+
+attributetype ( meetAttributeType:3.3
+    NAME 'meetPlaceOfBirth'
+    DESC 'MEET: place of birth'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE )
+
+attributetype ( meetAttributeType:3.4
+    NAME 'meetGender'
+    DESC 'MEET: gender'
+    EQUALITY integerMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+    SINGLE-VALUE )
+
+attributetype ( meetAttributeType:3.5
+    NAME 'meetSchool'
+    DESC 'MEET: school'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE )
+
+attributetype ( meetAttributeType:3.6
+    NAME 'meetReligion'
+    DESC 'MEET: religion'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE )
+
+attributetype ( meetAttributeType:3.7
+    NAME 'meetFamily'
+    DESC 'MEET: family'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE )
+
+objectclass ( meetObjectClass:2.1
+    NAME 'meetPerson'
+    DESC 'MEET: person mixin'
+    AUXILIARY
+    MAY ( meetIdNumber $ meetDateOfBirth $ meetPlaceOfBirth $ meetGender $ meetSchool $
+          meetReligion $ meetFamily ) )

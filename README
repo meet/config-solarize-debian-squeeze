@@ -1,1 +1,13 @@
-Configuration for solarize running Debian testing
+Setup for solarize running Debian testing
+
+Use the remote console to boot from CD:
+  http://cdimage.debian.org/cdimage/squeeze_di_alpha1/i386/iso-cd/debian-testing-i386-netinst.iso
+
+At the Install prompt, press tab to modify and add:
+  url=http://github.com/meet/config-solarize-debian-squeeze/raw/web/preseed.cfg
+
+Select:
+  English
+  United States
+  American English
+

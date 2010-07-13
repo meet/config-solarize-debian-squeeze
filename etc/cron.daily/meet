@@ -1,0 +1,3 @@
+#!/bin/sh
+
+run-parts --report /etc/opt/MEET/cron.daily

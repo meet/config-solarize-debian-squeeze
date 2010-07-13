@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#
+# Install Eclipse
+#
+
+set -e
+
+update-java-alternatives --set java-6-sun 2> /dev/null || true
+
+function install_eclipse {
+  temp=$(mktemp -d)
+  tar -xz -C $temp -f $1
+  mv $temp/eclipse /usr/local/$2
+  rm -rf $temp
+
+  ( cd /usr/local && chown -R root:staff $2 && chmod go-w $2 )
+  /usr/local/$2/eclipse -initialize -nosplash
+
+  rm -f /usr/local/eclipse
+  ( cd /usr/local && ln -s $2 eclipse)
+
+  if [ ! -h /usr/local/bin/eclipse ]
+  then
+    ( cd /usr/local/bin && ln -s ../eclipse/eclipse )
+  fi
+}
+
+for eclipse in /opt/MEET/software/eclipse-*.tar.gz
+do
+  version=$(basename $eclipse -linux-gtk.tar.gz)
+  if [ ! -d /usr/local/eclipse/$version ]
+  then
+    install_eclipse $eclipse $version
+  fi
+done

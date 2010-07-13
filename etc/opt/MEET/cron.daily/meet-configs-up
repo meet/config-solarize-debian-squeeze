@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# Update configuration files.
+# [maxg]
+#
+
+( cd / && git pull --quiet )

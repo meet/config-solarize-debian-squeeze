@@ -11,3 +11,10 @@ Select:
   United States
   American English
 
+Then configure the network:
+  eth2
+  Go Back (at the Hostname prompt)
+  Configure network manually
+  IP address, netmask, gateway, nameserver as noted in preseed.cfg
+  Hostname: solarize
+  Domain name: meet

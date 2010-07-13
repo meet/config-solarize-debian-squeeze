@@ -8,19 +8,19 @@
 
 zone "meet" {
 	type master;
-	file "/etc/bind/db.meet";
+	file "/var/lib/bind/db.meet";
 	allow-update { key "rndc-key"; };
 };
 
 zone "10.168.192.in-addr.arpa" {
 	type master;
-	file "/etc/bind/db.192.168.10";
+	file "/var/lib/bind/db.192.168.10";
 	allow-update { key "rndc-key"; };
 };
 
 zone "20.168.192.in-addr.arpa" {
 	type master;
-	file "/etc/bind/db.192.168.20";
+	file "/var/lib/bind/db.192.168.20";
 	allow-update { key "rndc-key"; };
 };
 

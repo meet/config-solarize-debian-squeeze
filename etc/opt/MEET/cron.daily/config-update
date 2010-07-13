@@ -5,4 +5,4 @@
 # [maxg]
 #
 
-( cd / && git pull --quiet )
+( cd / && git pull origin master --quiet )

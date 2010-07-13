@@ -18,3 +18,8 @@ Then configure the network:
   IP address, netmask, gateway, nameserver as noted in preseed.cfg
   Hostname: solarize
   Domain name: meet
+
+Then confirm partitions:
+  (check that the #1 partition is about 10 GB)
+  Finish partitioning and write changes to disk
+  Yes

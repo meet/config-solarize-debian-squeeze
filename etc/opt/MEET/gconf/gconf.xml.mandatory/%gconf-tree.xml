@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<gconf>
+        <dir name="apps">
+		<dir name="gnome-screensaver">
+			<entry name="logout_enabled" type="bool" value="true" />
+			<entry name="logout_delay" type="int" value="30" />
+			<entry name="logout_command" type="string">
+				<stringvalue>gnome-session-save --logout</stringvalue>
+			</entry>
+		</dir>
+        </dir>
+        <dir name="desktop">
+                <dir name="gnome">
+                        <dir name="background">
+                                <entry name="color_shading_type" type="string">
+                                        <stringvalue>solid</stringvalue>
+                                </entry>
+                                <entry name="primary_color" type="string">
+                                        <stringvalue>#76848F</stringvalue>
+                                </entry>
+                                <entry name="picture_options" type="string">
+                                        <stringvalue>none</stringvalue>
+                                </entry>
+                        </dir>
+                        <dir name="remote_access">
+				<entry name="enabled" type="bool" value="true" />
+				<entry name="prompt_enabled" type="bool" value="true" />
+                        </dir>
+                </dir>
+        </dir>
+</gconf>

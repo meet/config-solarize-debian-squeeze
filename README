@@ -36,4 +36,9 @@ If the installer includes a `trunk` kernel:
   Readable by group `openldap`, not readable by others
   Credentials for replication
 
+Quotas need to be enabled by running:
+  shutdown now
+  umount and then mount /srv/home
+  quotacheck -c -a -v
+
 Sun Rays, fatlab netbooting, and Eclipse are set up with scripts in /root

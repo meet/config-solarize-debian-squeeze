@@ -127,27 +127,30 @@ then
   cp $z /etc/init.d/ && chmod 755 /etc/init.d/$z && update-rc.d $z defaults 99 01
 fi
 
-# XXX if [ ! -f srss_usb_etc ]
-# XXX then
-# XXX   #
-# XXX   # Audio/Serial-IO/USB-Storage
-# XXX   #
-# XXX 
-# XXX   apt-get install linux-headers-`uname -r`
-# XXX 
-# XXX   diff="modules-4.1beta.diff"
-# XXX   [ ! -r $diff ] && wget "$source/$diff"
-# XXX 
-# XXX   ( cd /usr/src/ && patch -p0 --forward || true ) < $diff
-# XXX 
-# XXX   make -C /usr/src/SUNWut/utadem clean default install
-# XXX   make -C /usr/src/SUNWut/utio clean defalut install
-# XXX   make -C /usr/src/SUNWut/utdisk clean default install
-# XXX 
-# XXX   touch srss_usb_etc
-# XXX fi
+if [ ! -f srss_usb_etc ]
+then
+  #
+  # Audio/Serial-IO/USB-Storage
+  #
 
-# XXX utdomount!!!
+  apt-get install linux-headers-`uname -r`
+
+  [ ! -r utadem.patch ] && wget -O utadem.patch "$source/Utadem.MR20090816.patch.txt"
+  [ ! -r utdisk.patch ] && wget -O utdisk.patch "$source/Utdisk.MR20090816.patch.maxg.txt"
+  [ ! -r utio.patch ] && wget -O utio.patch "$source/Utio.MR20090816.patch.txt"
+
+  ( cd /usr/src/SUNWut && patch -p0 --forward || true ) < utadem.patch
+  ( cd /usr/src/SUNWut && patch -p0 --forward || true ) < utdisk.patch
+  ( cd /usr/src/SUNWut && patch -p0 --forward || true ) < utio.patch
+
+  make -C /usr/src/SUNWut/utadem clean default install
+  make -C /usr/src/SUNWut/utio clean default install
+  make -C /usr/src/SUNWut/utdisk clean default install
+
+  touch srss_usb_etc
+fi
+
+# XXX utdomount replacement
 
 #
 # Initial config
@@ -201,7 +204,7 @@ then
   # ==============
   
   sudo /opt/SUNWut/sbin/utadm -a eth0
-  ( cd / git checkout -- etc/dhcp3/dhcpd.conf etc/hosts etc/network/interfaces )
+  ( cd / && git checkout -- etc/dhcp3/dhcpd.conf etc/hosts etc/network/interfaces )
   touch srss_ut_net_0
 fi
   
@@ -225,7 +228,7 @@ then
   # ==============
 
   sudo /opt/SUNWut/sbin/utadm -a eth1
-  ( cd / git checkout -- etc/dhcp3/dhcpd.conf etc/hosts etc/network/interfaces )
+  ( cd / && git checkout -- etc/dhcp3/dhcpd.conf etc/hosts etc/network/interfaces )
   touch srss_ut_net_1
 fi
 
@@ -233,7 +236,7 @@ fi
 
 /opt/SUNWut/sbin/utadm -L on
 
-/etc/init.d/dhcp3-server stop || true
-/etc/init.d/dhcp3-server start
+service dhcp3-server stop || true
+service dhcp3-server start
 
 /etc/init.d/zsunray-init start

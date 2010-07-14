@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Eclipse
+Comment=Develop applications in a variety of different programming languages
+Exec=/usr/local/eclipse/eclipse
+Icon=/opt/MEET/usr/share/pixmaps/eclipse48.png
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Application;Development;
+StartupNotify=true

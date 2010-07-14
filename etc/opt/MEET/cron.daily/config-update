@@ -6,3 +6,5 @@
 #
 
 ( cd / && git pull origin master --quiet )
+
+update-gconf-defaults

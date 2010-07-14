@@ -1,0 +1,20 @@
+/apps/panel/default_setup/general/object_id_list [menu_bar,browser_launcher,eclipse_launcher,terminal_launcher]
+
+/apps/panel/default_setup/objects/browser_launcher/launcher_location firefox.desktop
+/apps/panel/default_setup/objects/browser_launcher/position          240
+
+/apps/panel/default_setup/objects/eclipse_launcher/object_type       launcher-object
+/apps/panel/default_setup/objects/eclipse_launcher/toplevel_id       top_panel
+/apps/panel/default_setup/objects/eclipse_launcher/position          270
+/apps/panel/default_setup/objects/eclipse_launcher/panel_right_stick false
+/apps/panel/default_setup/objects/eclipse_launcher/locked            true
+/apps/panel/default_setup/objects/eclipse_launcher/launcher_location eclipse.desktop
+
+/apps/panel/default_setup/objects/terminal_launcher/object_type       launcher-object
+/apps/panel/default_setup/objects/terminal_launcher/toplevel_id       top_panel
+/apps/panel/default_setup/objects/terminal_launcher/position          300
+/apps/panel/default_setup/objects/terminal_launcher/panel_right_stick false
+/apps/panel/default_setup/objects/terminal_launcher/locked            true
+/apps/panel/default_setup/objects/terminal_launcher/launcher_location gnome-terminal.desktop
+
+/apps/gnome-session/options/logout_effect    black

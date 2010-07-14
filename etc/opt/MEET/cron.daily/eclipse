@@ -8,18 +8,43 @@ set -e
 
 update-java-alternatives --set java-6-sun 2> /dev/null || true
 
+function install_p2_iu {
+  $1 -nosplash -application org.eclipse.equinox.p2.director -metadatarepository $2 -artifactrepository $2 -installIU $3
+}
+
 function install_eclipse {
   temp=$(mktemp -d)
   tar -xz -C $temp -f $1
   mv $temp/eclipse /usr/local/$2
   rm -rf $temp
 
-  ( cd /usr/local && chown -R root:staff $2 && chmod go-w $2 )
   /usr/local/$2/eclipse -initialize -nosplash
 
+  # Install Subclipse
+  for iu in org.tigris.subversion.subclipse.feature.group \
+            org.tigris.subversion.subclipse.graph.feature.feature.group \
+            org.tigris.subversion.clientadapter.feature.feature.group \
+            org.tigris.subversion.clientadapter.javahl.feature.feature.group \
+            org.tigris.subversion.clientadapter.svnkit.feature.feature.group \
+            org.tmatesoft.svnkit.feature.group \
+            com.sun.jna.feature.group
+  do
+    install_p2_iu /usr/local/$2/eclipse http://subclipse.tigris.org/update_1.6.x $iu
+  done
+
+  # Include revision in default workspace name
+  sed -i "s|user.home/workspace$|user.home/workspace${2#eclipse}|" \
+    /usr/local/$2/configuration/config.ini
+
+  # Make Java the default perspective
+  sed -i 's|\(.*/defaultPerspectiveId=\).*|\1org.eclipse.jdt.ui.JavaPerspective|' \
+    /usr/local/$2/plugins/org.eclipse.*/plugin_customization.ini
+
+  ( cd /usr/local && chown -R root:staff $2 && chmod go-w $2 )
+
+  # Symlinks for easy running
   rm -f /usr/local/eclipse
   ( cd /usr/local && ln -s $2 eclipse)
-
   if [ ! -h /usr/local/bin/eclipse ]
   then
     ( cd /usr/local/bin && ln -s ../eclipse/eclipse )

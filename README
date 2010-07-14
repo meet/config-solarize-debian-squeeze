@@ -1,5 +1,7 @@
 Setup for solarize running Debian testing
 
+INSTALLING
+
 Use the remote console to boot from CD:
   http://cdimage.debian.org/cdimage/squeeze_di_alpha1/i386/iso-cd/debian-testing-i386-netinst.iso
 
@@ -23,3 +25,15 @@ Then confirm partitions:
   (check that the #1 partition is about 10 GB)
   Finish partitioning and write changes to disk
   Yes
+
+SETUP
+
+If the installer includes a `trunk` kernel:
+  Boot into the other one
+  Purge the package, e.g.: dpkg -P linux-image-2.6.32-trunk-686
+
+`slapd` requires adjustments to the config file:
+  Readable by group `openldap`, not readable by others
+  Credentials for replication
+
+Sun Rays, fatlab netbooting, and Eclipse are set up with scripts in /root

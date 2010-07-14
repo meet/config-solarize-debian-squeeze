@@ -1,0 +1,40 @@
+#!/usr/bin/ruby
+
+#
+# Creates home directories based on users in LDAP. Copies in files from the
+# /etc/opt/MEET/skel "skeleton" directory.
+# [maxg]
+#
+
+SKEL = "/etc/opt/MEET/skel"
+SRV = "/srv"
+
+GROUP = "meet"
+GROUPGID = `getent group #{GROUP}`.split(":")[2]
+
+BLOCKS = 512000
+
+class HomeDirs
+
+  def self.create
+    `getent passwd`.split("\n").each do |passwd|
+      user, pass, uid, gid, name, home, shell = passwd.split(":")
+      next unless gid == GROUPGID && home =~ /^\/home\//
+      srvhome = "#{SRV}#{home}"
+      next if FileTest.exist? srvhome
+    
+      puts "Creating home directory for #{user}"
+      run ['cp', '-R', SKEL, srvhome]
+      run ['chmod', '750', srvhome]
+      run ['chown', '-R', "#{user}:#{GROUP}", srvhome]
+      run ['setquota', user, BLOCKS.to_s, (BLOCKS*1.1).to_i.to_s, '0', '0', "#{SRV}/home"]
+    end
+  end
+
+  def self.run(arr)
+    puts "  #{arr.inspect}"
+    system *arr
+  end
+end
+
+HomeDirs::create

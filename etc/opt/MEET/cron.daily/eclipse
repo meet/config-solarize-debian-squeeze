@@ -54,7 +54,7 @@ function install_eclipse {
 for eclipse in /opt/MEET/software/eclipse-*.tar.gz
 do
   version=$(basename $eclipse -linux-gtk.tar.gz)
-  if [ ! -d /usr/local/eclipse/$version ]
+  if [ ! -d /usr/local/$version ]
   then
     install_eclipse $eclipse $version
   fi

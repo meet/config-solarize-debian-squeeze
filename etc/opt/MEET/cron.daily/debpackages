@@ -8,5 +8,5 @@
 apt_get="apt-get --quiet --quiet"
 
 $apt_get update
-xargs -a /etc/opt/MEET/debpackages/add $apt_get --no-remove install
+xargs -a /etc/opt/MEET/debpackages/add $apt_get --no-remove --yes --allow-unauthenticated install
 xargs -a /etc/opt/MEET/debpackages/remove $apt_get --purge remove

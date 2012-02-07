@@ -2,7 +2,7 @@
 
 set -evx
 
-wget -N http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/netboot.tar.gz
+wget -N http://ftp.nl.debian.org/debian/dists/squeeze/main/installer-i386/current/images/netboot/netboot.tar.gz
 
 mkdir -p netboot
 tar x -C netboot -z -f netboot.tar.gz

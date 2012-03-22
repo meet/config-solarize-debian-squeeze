@@ -9,4 +9,5 @@ apt_get="apt-get --quiet --quiet"
 
 $apt_get update
 xargs -a /etc/opt/MEET/debpackages/add $apt_get --no-remove --yes --allow-unauthenticated install
+xargs -a /etc/opt/MEET/debpackages/backport $apt_get --no-remove --yes --allow-unauthenticated --target-release squeeze-backports install
 xargs -a /etc/opt/MEET/debpackages/remove $apt_get --purge remove

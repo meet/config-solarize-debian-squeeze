@@ -27,9 +27,16 @@ function install_eclipse {
             org.tigris.subversion.clientadapter.javahl.feature.feature.group \
             org.tigris.subversion.clientadapter.svnkit.feature.feature.group \
             org.tmatesoft.svnkit.feature.group \
-            com.sun.jna.feature.group
+            net.java.dev.jna.feature.group
   do
-    install_p2_iu /usr/local/$2/eclipse http://subclipse.tigris.org/update_1.6.x $iu
+    install_p2_iu /usr/local/$2/eclipse http://subclipse.tigris.org/update_1.8.x $iu
+  done
+
+  # Install Google App Engine
+  for iu in com.google.gdt.eclipse.suite.e37.feature.feature.group \
+            com.google.appengine.eclipse.sdkbundle.e37.feature.feature.group
+  do
+    install_p2_iu /usr/local/$2/eclipse http://dl.google.com/eclipse/plugin/3.7 $iu
   done
 
   # Include revision in default workspace name

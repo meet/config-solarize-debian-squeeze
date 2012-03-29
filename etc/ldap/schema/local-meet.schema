@@ -80,3 +80,15 @@ objectclass ( meetObjectClass:2.1
     AUXILIARY
     MAY ( meetIdNumber $ meetDateOfBirth $ meetPlaceOfBirth $ meetGender $ meetSchool $
           meetReligion $ meetFamily ) )
+
+attributetype ( meetAttributeType:4.1
+    NAME 'meetAlias'
+    DESC 'MEET: alias'
+    EQUALITY caseIgnoreMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+
+objectclass ( meetObjectClass:4.1
+    NAME 'meetAliasedObject'
+    DESC 'MEET: aliased object mixin'
+    AUXILIARY
+    MAY meetAlias )
